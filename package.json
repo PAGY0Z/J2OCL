@@ -1,0 +1,51 @@
+{
+  "name": "@pagy0z/j2ocl",
+  "version": "0.1.0",
+  "private": false,
+  "description": "Write OpenCL GPU kernels using plain JavaScript/TypeScript syntax.",
+  "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PAGY0Z/J2OCL.git"
+  },
+  "homepage": "https://github.com/PAGY0Z/J2OCL#readme",
+  "bugs": {
+    "url": "https://github.com/PAGY0Z/J2OCL/issues"
+  },
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.eslint.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "prepare": "npm run build",
+    "docs:sync-version": "node scripts/sync-doc-version.mjs",
+    "version": "npm run docs:sync-version && git add documentations/index.html"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.7.0",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.5",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.65.0",
+    "vitest": "^4.1.10"
+  }
+}
