@@ -32,15 +32,18 @@
     "typecheck": "tsc --noEmit -p tsconfig.eslint.json",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint": "eslint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "npm run build",
     "docs:sync-version": "node scripts/sync-doc-version.mjs",
+    "coverage:badges": "node scripts/generate-coverage-badges.mjs",
     "version": "npm run docs:sync-version && git add documentations/index.html"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@vitest/coverage-v8": "^4.1.10",
     "eslint": "^10.7.0",
     "globals": "^17.7.0",
     "prettier": "^3.9.5",

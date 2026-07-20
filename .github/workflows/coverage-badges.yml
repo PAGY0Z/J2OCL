@@ -1,0 +1,37 @@
+name: Coverage badges
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  badges:
+    name: Publish coverage badges
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.x'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:coverage
+
+      - name: Generate badge data
+        run: npm run coverage:badges
+
+      - name: Publish badges
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: badges
+          folder: coverage-badges
+          single-commit: true

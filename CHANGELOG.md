@@ -23,3 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - GitHub repository configuration: branch protection ruleset for `main` (required pull
   request, required CI checks, no force-push/deletion), repository topics, and security
   settings (secret scanning push protection, Dependabot security updates).
+- Line and branch coverage via `@vitest/coverage-v8` (`npm run test:coverage`), measured
+  in CI but with no enforced minimum threshold yet. Self-hosted coverage badges (no
+  external service) published to a dedicated `badges` branch on every push to `main`
+  and shown in the README via shields.io endpoint badges.

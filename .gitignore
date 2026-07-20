@@ -1,5 +1,9 @@
 node_modules
 dist
 coverage
+coverage-badges
 *.log
 docs/
+AGENTS.md
+CLAUDE.md
+.claude/
