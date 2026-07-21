@@ -35,3 +35,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Vitest now transforms `.ts`/`.mts`/`.cts` sources through `esbuild` (new devDependency)
   ahead of its default transform, so TC39 stage-3 class decorators (used by `@J2OCL.kernel`)
   run correctly under the test suite.
+- Kernel detection via the TypeScript compiler API (`detectKernels` in `src/cli/`):
+  given a `ts.Program` and the real `Kernel`/`kernel` declarations to match against,
+  finds every valid `@kernel`-decorated static method on a class (transitively)
+  extending `Kernel`, matching by resolved symbol rather than by name so aliased
+  imports and unrelated homonymous code are handled correctly. Defensively
+  re-validates class ancestry and static-method placement, and fails loudly if either
+  constraint was bypassed via `@ts-expect-error`/`@ts-ignore` in the analyzed source.
+  Not yet wired into a runnable CLI command, and does not yet lower results to an
+  intermediate representation — both remain future work. Adds `@types/node` (new
+  devDependency) for the test helpers that build these programs, the first code in
+  this repo to use Node built-ins (`fs`/`os`/`path`/`url`) directly.
