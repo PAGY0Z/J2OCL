@@ -4,4 +4,4 @@
  * of this file, via any medium, is strictly prohibited.
  */
 
-export {};
+export * from './detect-kernels.js';
