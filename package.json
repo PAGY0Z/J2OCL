@@ -1,6 +1,6 @@
 {
   "name": "@pagy0z/j2ocl",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "description": "Write OpenCL GPU kernels using plain JavaScript/TypeScript syntax.",
   "license": "UNLICENSED",
