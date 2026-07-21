@@ -27,3 +27,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   in CI but with no enforced minimum threshold yet. Self-hosted coverage badges (no
   external service) published to a dedicated `badges` branch on every push to `main`
   and shown in the README via shields.io endpoint badges.
+- `J2OCL.Kernel` base class and `@J2OCL.kernel` static-method decorator, marking a
+  static method as a kernel entry point (enforced both at compile time and at runtime).
+  Definition only for now — calling a decorated method behaves like an ordinary static
+  method call; development-mode simulation and GPU dispatch are a separate, not yet
+  implemented feature.
+- Vitest now transforms `.ts`/`.mts`/`.cts` sources through `esbuild` (new devDependency)
+  ahead of its default transform, so TC39 stage-3 class decorators (used by `@J2OCL.kernel`)
+  run correctly under the test suite.
