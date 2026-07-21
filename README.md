@@ -4,6 +4,11 @@
 [![Line Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/PAGY0Z/J2OCL/badges/lines.json)](https://github.com/PAGY0Z/J2OCL/actions/workflows/coverage-badges.yml)
 [![Branch Coverage](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/PAGY0Z/J2OCL/badges/branches.json)](https://github.com/PAGY0Z/J2OCL/actions/workflows/coverage-badges.yml)
 
+J2OCL lets JavaScript and TypeScript developers write real OpenCL GPU kernels without
+ever touching C or low-level code. It compiles a strict, fully-typed subset of TS ahead
+of time into native OpenCL C, mirroring OpenCL's own types and execution model as
+TypeScript classes.
+
 ## Commands
 
 ```bash

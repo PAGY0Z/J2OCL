@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Short library description in `README.md`.
+
 ### Changed
 
 - `publish-npm.yml` now authenticates to the npm registry via OIDC trusted publishing
