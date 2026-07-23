@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-07-23
+
 ### Added
 
 - OpenCL scalar types (`src/types/scalar/`): `Int8`, `UInt8`, `Int16`, `UInt16`, `Int32`,
