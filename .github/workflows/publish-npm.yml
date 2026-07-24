@@ -4,11 +4,13 @@ on:
   push:
     tags:
       - 'v*'
+  workflow_dispatch:
 
 jobs:
   publish:
     name: Publish package to the public npm registry
     runs-on: ubuntu-latest
+    environment: npm publish
     permissions:
       contents: read
       id-token: write
