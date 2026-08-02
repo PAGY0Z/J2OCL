@@ -8,7 +8,9 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const rootDir = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
+const rootDir = path.dirname(
+  path.dirname(path.dirname(fileURLToPath(import.meta.url))),
+);
 const summaryPath = path.join(rootDir, 'coverage', 'coverage-summary.json');
 const outDir = path.join(rootDir, 'coverage-badges');
 

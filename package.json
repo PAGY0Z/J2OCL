@@ -37,9 +37,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "prepare": "npm run build",
-    "docs:sync-version": "node scripts/sync-doc-version.mjs",
-    "coverage:badges": "node scripts/generate-coverage-badges.mjs",
-    "version": "npm run docs:sync-version && git add documentations/index.html"
+    "coverage:badges": "node .github/scripts/generate-coverage-badges.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
