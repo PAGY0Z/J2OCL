@@ -54,6 +54,10 @@ export class FloatArray {
   /**
    * The number of elements in this array.
    *
+   * Not usable inside a compiled kernel — host/dev-mode code only. Once compiled, this array
+   * is a bare C pointer, which carries no length information; a kernel body that needs its
+   * buffer's length must receive it as an explicit scalar parameter instead.
+   *
    * @returns The element count.
    */
   get length(): UInt32 {

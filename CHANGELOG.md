@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `getGlobalId` intrinsic declaration (`src/intrinsics/`), recognized by symbol for later
+  use by the compiler — not yet backed by a dev-mode implementation, so calling it
+  directly in JS always throws.
+
+### Changed
+
+- Documented on all 10 array classes (`src/types/array/`) that `.length` is only usable
+  in host/dev-mode code, not inside a compiled kernel.
+- Moved `generate-coverage-badges.mjs` from `scripts/` into `.github/scripts/` — a folder
+  holding a single CI-only script no longer earned its place at the repo root.
+
+### Removed
+
+- `src/host-api/` and `src/runtime/`, which held nothing but `export {}` placeholders —
+  removed until that work actually starts.
+- `documentations/` (the public-facing doc page) and its version-sync script
+  (`scripts/sync-doc-version.mjs`), along with the `docs:sync-version`/`version` npm
+  scripts that drove it.
+
+### Security
+
+- Bumped `brace-expansion` via `npm audit fix` (high-severity advisory).
+
 ## [0.2.0] - 2026-07-23
 
 ### Added
