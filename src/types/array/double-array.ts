@@ -6,6 +6,7 @@
 
 import { Float64 } from '../scalar/float64.js';
 import { UInt32 } from '../scalar/uint32.js';
+import { registerRaw } from './raw-access.js';
 
 /**
  * OpenCL's `double*` buffer — a flat array of `Float64` values, backed by a real native
@@ -22,6 +23,7 @@ export class DoubleArray {
    */
   private constructor(raw: Float64Array) {
     this.#raw = raw;
+    registerRaw(this, raw);
   }
 
   /**

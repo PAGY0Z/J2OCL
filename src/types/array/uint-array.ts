@@ -5,6 +5,7 @@
  */
 
 import { UInt32 } from '../scalar/uint32.js';
+import { registerRaw } from './raw-access.js';
 
 /**
  * OpenCL's `uint*` buffer — a flat array of `UInt32` values, backed by a real native
@@ -18,6 +19,7 @@ export class UIntArray {
    */
   private constructor(raw: Uint32Array) {
     this.#raw = raw;
+    registerRaw(this, raw);
   }
 
   /**

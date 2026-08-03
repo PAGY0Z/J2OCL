@@ -6,6 +6,7 @@
 
 import { UInt32 } from '../scalar/uint32.js';
 import { UInt8 } from '../scalar/uint8.js';
+import { registerRaw } from './raw-access.js';
 
 /**
  * OpenCL's `uchar*` buffer — a flat array of `UInt8` values, backed by a real native
@@ -19,6 +20,7 @@ export class UCharArray {
    */
   private constructor(raw: Uint8Array) {
     this.#raw = raw;
+    registerRaw(this, raw);
   }
 
   /**

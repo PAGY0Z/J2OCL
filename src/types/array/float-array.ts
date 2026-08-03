@@ -6,6 +6,7 @@
 
 import { Float32 } from '../scalar/float32.js';
 import { UInt32 } from '../scalar/uint32.js';
+import { registerRaw } from './raw-access.js';
 
 /**
  * OpenCL's `float*` buffer — a flat array of `Float32` values, backed by a real native
@@ -19,6 +20,7 @@ export class FloatArray {
    */
   private constructor(raw: Float32Array) {
     this.#raw = raw;
+    registerRaw(this, raw);
   }
 
   /**
