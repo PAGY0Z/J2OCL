@@ -6,6 +6,7 @@
 
 import { Int16 } from '../scalar/int16.js';
 import { UInt32 } from '../scalar/uint32.js';
+import { registerRaw } from './raw-access.js';
 
 /**
  * OpenCL's `short*` buffer — a flat array of `Int16` values, backed by a real native
@@ -19,6 +20,7 @@ export class ShortArray {
    */
   private constructor(raw: Int16Array) {
     this.#raw = raw;
+    registerRaw(this, raw);
   }
 
   /**

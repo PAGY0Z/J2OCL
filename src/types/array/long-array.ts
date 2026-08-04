@@ -6,6 +6,7 @@
 
 import { Int64 } from '../scalar/int64.js';
 import { UInt32 } from '../scalar/uint32.js';
+import { registerRaw } from './raw-access.js';
 
 /**
  * OpenCL's `long*` buffer — a flat array of `Int64` values, backed by a real native
@@ -20,6 +21,7 @@ export class LongArray {
    */
   private constructor(raw: BigInt64Array) {
     this.#raw = raw;
+    registerRaw(this, raw);
   }
 
   /**

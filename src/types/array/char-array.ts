@@ -6,6 +6,7 @@
 
 import { Int8 } from '../scalar/int8.js';
 import { UInt32 } from '../scalar/uint32.js';
+import { registerRaw } from './raw-access.js';
 
 /**
  * OpenCL's `char*` buffer — a flat array of `Int8` values. Storage is always the real native
@@ -20,6 +21,7 @@ export class CharArray {
    */
   private constructor(raw: Int8Array) {
     this.#raw = raw;
+    registerRaw(this, raw);
   }
 
   /**

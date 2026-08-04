@@ -32,11 +32,13 @@ export default defineConfig({
   plugins: [decoratorSupportPlugin()],
   test: {
     include: ['test/**/*.test.ts'],
+    testTimeout: 20000,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'json-summary'],
       reportsDirectory: './coverage',
       include: ['src/**/*.ts'],
+      exclude: ['src/runtime/node-3d-opencl-provider.ts'],
     },
   },
 });

@@ -6,6 +6,7 @@
 
 import { UInt32 } from '../scalar/uint32.js';
 import { UInt64 } from '../scalar/uint64.js';
+import { registerRaw } from './raw-access.js';
 
 /**
  * OpenCL's `ulong*` buffer — a flat array of `UInt64` values, backed by a real native
@@ -19,6 +20,7 @@ export class ULongArray {
    */
   private constructor(raw: BigUint64Array) {
     this.#raw = raw;
+    registerRaw(this, raw);
   }
 
   /**

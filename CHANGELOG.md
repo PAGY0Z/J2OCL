@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- A raw-buffer bridge (`src/types/array/raw-access.ts`) exposing each array type's
+  private native typed array via a `WeakMap`, for future host-side code to use for
+  zero-copy data transfer, without adding a new public property that kernel-writing code
+  could misuse.
+- `OpenCLProvider` (`src/runtime/provider.ts`): the seam between `src/host-api/` and a
+  real OpenCL binding, plus its only production implementation, `NodeOpenCLProvider`
+  (`src/runtime/node-3d-opencl-provider.ts`) — the only file in the project allowed to
+  import `@node-3d/opencl` directly.
+
+### Changed
+
+- Bumped the minimum supported Node.js version to 24.13.0 (required by
+  `@node-3d/opencl`); CI now tests against Node 24.x only.
+- Added `"types": ["node"]` to `tsconfig.json` — without it, `tsc -p tsconfig.json`
+  fails to resolve `node:*` imports and Node globals despite `@types/node` being
+  installed. Raised Vitest's `testTimeout` to 20s to accommodate real-hardware-dependent
+  tests.
+
 ## [0.3.0] - 2026-08-02
 
 ### Added

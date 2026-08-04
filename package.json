@@ -25,7 +25,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=20"
+    "node": ">=24.13.0"
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -38,6 +38,9 @@
     "format:check": "prettier --check .",
     "prepare": "npm run build",
     "coverage:badges": "node .github/scripts/generate-coverage-badges.mjs"
+  },
+  "dependencies": {
+    "@node-3d/opencl": "^3.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

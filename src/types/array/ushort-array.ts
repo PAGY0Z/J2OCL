@@ -6,6 +6,7 @@
 
 import { UInt16 } from '../scalar/uint16.js';
 import { UInt32 } from '../scalar/uint32.js';
+import { registerRaw } from './raw-access.js';
 
 /**
  * OpenCL's `ushort*` buffer — a flat array of `UInt16` values, backed by a real native
@@ -19,6 +20,7 @@ export class UShortArray {
    */
   private constructor(raw: Uint16Array) {
     this.#raw = raw;
+    registerRaw(this, raw);
   }
 
   /**
