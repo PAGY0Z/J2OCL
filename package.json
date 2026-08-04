@@ -39,12 +39,8 @@
     "prepare": "npm run build",
     "coverage:badges": "node .github/scripts/generate-coverage-badges.mjs"
   },
-  "bin": {
-    "j2ocl": "./dist/cli/bin.js"
-  },
   "dependencies": {
-    "@node-3d/opencl": "^3.0.0",
-    "typescript": "^6.0.3"
+    "@node-3d/opencl": "^3.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -54,6 +50,7 @@
     "eslint": "^10.7.0",
     "globals": "^17.7.0",
     "prettier": "^3.9.5",
+    "typescript": "^6.0.3",
     "typescript-eslint": "^8.65.0",
     "vitest": "^4.1.10"
   }

@@ -38,7 +38,7 @@ export default defineConfig({
       reporter: ['text', 'html', 'json-summary'],
       reportsDirectory: './coverage',
       include: ['src/**/*.ts'],
-      exclude: ['src/runtime/node-3d-opencl-provider.ts', 'src/cli/bin.ts'],
+      exclude: ['src/runtime/node-3d-opencl-provider.ts'],
     },
   },
 });
