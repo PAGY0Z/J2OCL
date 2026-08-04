@@ -74,12 +74,13 @@ export interface OpenCLProvider {
   /** Downloads `buffer`'s contents into `hostData` via `queue`, blocking until the transfer completes. */
   readBuffer(queue: unknown, buffer: unknown, hostData: ArrayBufferView): void;
 
-  /** Compiles `source` (OpenCL C text) into an as-yet-unbuilt program on `context`. */
+  /** Loads `source` (OpenCL C text) into a new, as-yet-unbuilt program on `context`. */
   createProgram(context: unknown, source: string): unknown;
   /**
-   * Builds a program (from `createProgram`) for `device`.
+   * Builds a program (from `createProgram`) for `device` — this is the step that
+   * actually compiles its OpenCL C source.
    *
-   * @throws {Error} If `source` fails to compile — call `getProgramBuildLog` to find
+   * @throws {Error} If the program fails to build — call `getProgramBuildLog` to find
    * out why.
    */
   buildProgram(program: unknown, device: unknown): void;

@@ -50,17 +50,24 @@ export class NodeOpenCLProvider implements OpenCLProvider {
   }
 
   /**
-   * Reads `device`'s OpenCL device-type via `cl.getDeviceInfo`'s `DEVICE_TYPE` field —
-   * one of OpenCL's own numeric device-type constants — and maps it to a `DeviceKind`.
+   * Reads `device`'s OpenCL device-type via `cl.getDeviceInfo`'s `DEVICE_TYPE` field and
+   * maps it to a `DeviceKind`.
+   *
+   * In plain terms: `DEVICE_TYPE` is a bitfield, not a plain enum value — a device that
+   * also happens to be its platform's default device reports its real kind combined with
+   * the separate `DEVICE_TYPE_DEFAULT` bit (e.g. a default GPU reports `GPU | DEFAULT`,
+   * not just `GPU`). Comparing with `===` would then miss it entirely (`GPU | DEFAULT !==
+   * GPU`) and misclassify it as `'default'`, so each kind is checked as a bitwise `&`
+   * membership test instead.
    */
   getDeviceKind(device: unknown): DeviceKind {
     const type = cl.getDeviceInfo(
       device as TClDevice,
       cl.DEVICE_TYPE,
     ) as number;
-    if (type === cl.DEVICE_TYPE_GPU) return 'gpu';
-    if (type === cl.DEVICE_TYPE_CPU) return 'cpu';
-    if (type === cl.DEVICE_TYPE_ACCELERATOR) return 'accelerator';
+    if (type & cl.DEVICE_TYPE_GPU) return 'gpu';
+    if (type & cl.DEVICE_TYPE_CPU) return 'cpu';
+    if (type & cl.DEVICE_TYPE_ACCELERATOR) return 'accelerator';
     return 'default';
   }
 
@@ -139,16 +146,17 @@ export class NodeOpenCLProvider implements OpenCLProvider {
     );
   }
 
-  /** Compiles `source` into an as-yet-unbuilt program, via `cl.createProgramWithSource`. */
+  /** Loads `source` into a new, as-yet-unbuilt program, via `cl.createProgramWithSource`. */
   createProgram(context: unknown, source: string): unknown {
     return cl.createProgramWithSource(context as TClContext, source);
   }
 
   /**
-   * Builds a program for `device`, via `cl.buildProgram`.
+   * Builds a program for `device`, via `cl.buildProgram` — this is the step that
+   * actually compiles its OpenCL C source.
    *
-   * @throws {Error} `@node-3d/opencl` itself throws when the OpenCL C source fails to
-   * compile — this rethrows without the build log; callers should catch and call
+   * @throws {Error} `@node-3d/opencl` itself throws when the program fails to build —
+   * this rethrows without the build log; callers should catch and call
    * `getProgramBuildLog` to find out why.
    */
   buildProgram(program: unknown, device: unknown): void {
