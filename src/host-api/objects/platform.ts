@@ -7,21 +7,18 @@
 import type { OpenCLProvider } from '../../runtime/provider.js';
 import { Device } from './device.js';
 
-export class Platform
-{
-    private constructor (
-        private readonly provider: OpenCLProvider,
-        readonly handle: unknown,
-        readonly name: string,
-    ) { }
+export class Platform {
+  private constructor(
+    private readonly provider: OpenCLProvider,
+    readonly handle: unknown,
+    readonly name: string,
+  ) {}
 
-    static list(provider: OpenCLProvider): Platform[]
-    {
-        return provider.listPlatforms().map((handle) => new Platform(provider, handle, provider.getPlatformName(handle)));
-    }
+  static list(provider: OpenCLProvider): Platform[] {
+    return provider.listPlatforms().map((handle) => new Platform(provider, handle, provider.getPlatformName(handle)));
+  }
 
-    devices(): Device[]
-    {
-        return Device.list(this.provider, this.handle);
-    }
+  devices(): Device[] {
+    return Device.list(this.provider, this.handle);
+  }
 }

@@ -7,32 +7,28 @@
 import type { BufferAccess, OpenCLProvider } from '../../runtime/provider.js';
 import type { Context } from './context.js';
 
-export class DeviceBuffer
-{
-    #disposed = false;
+export class DeviceBuffer {
+  #disposed = false;
 
-    private constructor (
-        private readonly provider: OpenCLProvider,
-        readonly handle: unknown,
-        readonly byteLength: number,
-        readonly elementCType: string,
-    ) { }
+  private constructor(
+    private readonly provider: OpenCLProvider,
+    readonly handle: unknown,
+    readonly byteLength: number,
+    readonly elementCType: string,
+  ) {}
 
-    static create(provider: OpenCLProvider, context: Context, byteLength: number, elementCType: string, access: BufferAccess): DeviceBuffer
-    {
-        const handle = provider.createBuffer(context.handle, byteLength, access);
-        return new DeviceBuffer(provider, handle, byteLength, elementCType);
-    }
+  static create(provider: OpenCLProvider, context: Context, byteLength: number, elementCType: string, access: BufferAccess): DeviceBuffer {
+    const handle = provider.createBuffer(context.handle, byteLength, access);
+    return new DeviceBuffer(provider, handle, byteLength, elementCType);
+  }
 
-    get argCType(): string
-    {
-        return `${this.elementCType}*`;
-    }
+  get argCType(): string {
+    return `${this.elementCType}*`;
+  }
 
-    dispose(): void
-    {
-        if (this.#disposed) return;
-        this.provider.releaseBuffer(this.handle);
-        this.#disposed = true;
-    }
+  dispose(): void {
+    if (this.#disposed) return;
+    this.provider.releaseBuffer(this.handle);
+    this.#disposed = true;
+  }
 }

@@ -7,8 +7,7 @@
 import ts from 'typescript';
 import type { J2OCLType } from './j2ocl-type.js';
 
-export interface LoweringAnchors
-{
-    getGlobalId: ts.FunctionDeclaration;
-    types: ReadonlyMap<J2OCLType, ts.ClassDeclaration>;
+export interface LoweringAnchors {
+  getGlobalId: ts.FunctionDeclaration;
+  types: ReadonlyMap<J2OCLType, ts.ClassDeclaration>;
 }

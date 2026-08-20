@@ -12,9 +12,8 @@ import { walkProgramForKernels } from './walk-program-for-kernels.js';
 
 export * from '../kernel-types.js';
 
-export function detectKernels(program: ts.Program, anchors: KernelAnchors): { kernels: KernelDescriptor[]; diagnostics: Diagnostic[]; }
-{
-    const checker = program.getTypeChecker();
-    const { kernelClassSymbol, kernelDecoratorSymbol } = resolveAnchorSymbols(checker, anchors);
-    return walkProgramForKernels(program, checker, kernelClassSymbol, kernelDecoratorSymbol);
+export function detectKernels(program: ts.Program, anchors: KernelAnchors): { kernels: KernelDescriptor[]; diagnostics: Diagnostic[] } {
+  const checker = program.getTypeChecker();
+  const { kernelClassSymbol, kernelDecoratorSymbol } = resolveAnchorSymbols(checker, anchors);
+  return walkProgramForKernels(program, checker, kernelClassSymbol, kernelDecoratorSymbol);
 }

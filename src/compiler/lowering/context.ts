@@ -10,45 +10,39 @@ import type { J2OCLType } from '../j2ocl-type.js';
 import type { LoweringAnchors } from '../lowering-anchors.js';
 import { resolveToOriginalSymbol } from '../ts-symbol-utils.js';
 
-export interface LoweringContext
-{
-    checker: ts.TypeChecker;
-    anchors: LoweringAnchors;
-    scope: Map<string, J2OCLType>;
-    diagnostics: Diagnostic[];
+export interface LoweringContext {
+  checker: ts.TypeChecker;
+  anchors: LoweringAnchors;
+  scope: Map<string, J2OCLType>;
+  diagnostics: Diagnostic[];
 }
 
-export function diagnosticAt(node: ts.Node, message: string): Diagnostic
-{
-    const sourceFile = node.getSourceFile();
-    const { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
-    return {
-        file: sourceFile.fileName,
-        line: line + 1,
-        column: character + 1,
-        message,
-    };
+export function diagnosticAt(node: ts.Node, message: string): Diagnostic {
+  const sourceFile = node.getSourceFile();
+  const { line, character } = sourceFile.getLineAndCharacterOfPosition(node.getStart());
+  return {
+    file: sourceFile.fileName,
+    line: line + 1,
+    column: character + 1,
+    message,
+  };
 }
 
-export function findTypeNameForSymbol(checker: ts.TypeChecker, anchors: LoweringAnchors, targetSymbol: ts.Symbol): J2OCLType | undefined
-{
-    for (const [typeName, classDeclaration] of anchors.types)
-    {
-        const nameNode = classDeclaration.name;
-        if (!nameNode) continue;
-        const anchorSymbol = checker.getSymbolAtLocation(nameNode);
-        if (anchorSymbol && resolveToOriginalSymbol(checker, anchorSymbol) === targetSymbol)
-        {
-            return typeName;
-        }
+export function findTypeNameForSymbol(checker: ts.TypeChecker, anchors: LoweringAnchors, targetSymbol: ts.Symbol): J2OCLType | undefined {
+  for (const [typeName, classDeclaration] of anchors.types) {
+    const nameNode = classDeclaration.name;
+    if (!nameNode) continue;
+    const anchorSymbol = checker.getSymbolAtLocation(nameNode);
+    if (anchorSymbol && resolveToOriginalSymbol(checker, anchorSymbol) === targetSymbol) {
+      return typeName;
     }
-    return undefined;
+  }
+  return undefined;
 }
 
-export function resolveJ2OCLType(checker: ts.TypeChecker, type: ts.Type, anchors: LoweringAnchors): J2OCLType | undefined
-{
-    const symbol = type.getSymbol();
-    if (!symbol) return undefined;
-    const resolved = resolveToOriginalSymbol(checker, symbol);
-    return findTypeNameForSymbol(checker, anchors, resolved);
+export function resolveJ2OCLType(checker: ts.TypeChecker, type: ts.Type, anchors: LoweringAnchors): J2OCLType | undefined {
+  const symbol = type.getSymbol();
+  if (!symbol) return undefined;
+  const resolved = resolveToOriginalSymbol(checker, symbol);
+  return findTypeNameForSymbol(checker, anchors, resolved);
 }

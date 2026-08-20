@@ -11,44 +11,37 @@ import { getRawBuffer } from '../../types/array/raw-access.js';
 import type { AnyJ2OCLArray } from '../arguments/array-element-type.js';
 import type { DeviceKernel } from './device-kernel.js';
 
-export class CommandQueue
-{
-    #disposed = false;
+export class CommandQueue {
+  #disposed = false;
 
-    private constructor (
-        private readonly provider: OpenCLProvider,
-        readonly handle: unknown,
-    ) { }
+  private constructor(
+    private readonly provider: OpenCLProvider,
+    readonly handle: unknown,
+  ) {}
 
-    static create(provider: OpenCLProvider, context: Context): CommandQueue
-    {
-        return new CommandQueue(provider, provider.createCommandQueue(context.handle, context.deviceHandle));
-    }
+  static create(provider: OpenCLProvider, context: Context): CommandQueue {
+    return new CommandQueue(provider, provider.createCommandQueue(context.handle, context.deviceHandle));
+  }
 
-    writeBuffer(buffer: DeviceBuffer, source: AnyJ2OCLArray): void
-    {
-        this.provider.writeBuffer(this.handle, buffer.handle, getRawBuffer(source));
-    }
+  writeBuffer(buffer: DeviceBuffer, source: AnyJ2OCLArray): void {
+    this.provider.writeBuffer(this.handle, buffer.handle, getRawBuffer(source));
+  }
 
-    readBuffer(buffer: DeviceBuffer, destination: AnyJ2OCLArray): void
-    {
-        this.provider.readBuffer(this.handle, buffer.handle, getRawBuffer(destination));
-    }
+  readBuffer(buffer: DeviceBuffer, destination: AnyJ2OCLArray): void {
+    this.provider.readBuffer(this.handle, buffer.handle, getRawBuffer(destination));
+  }
 
-    enqueueKernel(kernel: DeviceKernel, globalWorkSize: number[]): void
-    {
-        this.provider.enqueueKernel(this.handle, kernel.handle, globalWorkSize);
-    }
+  enqueueKernel(kernel: DeviceKernel, globalWorkSize: number[]): void {
+    this.provider.enqueueKernel(this.handle, kernel.handle, globalWorkSize);
+  }
 
-    finish(): void
-    {
-        this.provider.finish(this.handle);
-    }
+  finish(): void {
+    this.provider.finish(this.handle);
+  }
 
-    dispose(): void
-    {
-        if (this.#disposed) return;
-        this.provider.releaseCommandQueue(this.handle);
-        this.#disposed = true;
-    }
+  dispose(): void {
+    if (this.#disposed) return;
+    this.provider.releaseCommandQueue(this.handle);
+    this.#disposed = true;
+  }
 }

@@ -12,46 +12,39 @@ import { CommandQueue } from './command-queue.js';
 import { DeviceBuffer } from './device-buffer.js';
 import { Program } from './program.js';
 
-export class Context
-{
-    #disposed = false;
+export class Context {
+  #disposed = false;
 
-    private constructor (
-        private readonly provider: OpenCLProvider,
-        readonly handle: unknown,
-        private readonly device: Device,
-    ) { }
+  private constructor(
+    private readonly provider: OpenCLProvider,
+    readonly handle: unknown,
+    private readonly device: Device,
+  ) {}
 
-    static create(provider: OpenCLProvider, device: Device): Context
-    {
-        return new Context(provider, provider.createContext(device.handle), device);
-    }
+  static create(provider: OpenCLProvider, device: Device): Context {
+    return new Context(provider, provider.createContext(device.handle), device);
+  }
 
-    get deviceHandle(): unknown
-    {
-        return this.device.handle;
-    }
+  get deviceHandle(): unknown {
+    return this.device.handle;
+  }
 
-    createCommandQueue(): CommandQueue
-    {
-        return CommandQueue.create(this.provider, this);
-    }
+  createCommandQueue(): CommandQueue {
+    return CommandQueue.create(this.provider, this);
+  }
 
-    buildProgram(source: string): Program
-    {
-        return Program.build(this.provider, this, source);
-    }
+  buildProgram(source: string): Program {
+    return Program.build(this.provider, this, source);
+  }
 
-    createBuffer(array: AnyJ2OCLArray, access: BufferAccess): DeviceBuffer
-    {
-        const raw = getRawBuffer(array);
-        return DeviceBuffer.create(this.provider, this, raw.byteLength, elementCTypeOf(array), access);
-    }
+  createBuffer(array: AnyJ2OCLArray, access: BufferAccess): DeviceBuffer {
+    const raw = getRawBuffer(array);
+    return DeviceBuffer.create(this.provider, this, raw.byteLength, elementCTypeOf(array), access);
+  }
 
-    dispose(): void
-    {
-        if (this.#disposed) return;
-        this.provider.releaseContext(this.handle);
-        this.#disposed = true;
-    }
+  dispose(): void {
+    if (this.#disposed) return;
+    this.provider.releaseContext(this.handle);
+    this.#disposed = true;
+  }
 }

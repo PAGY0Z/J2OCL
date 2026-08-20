@@ -17,22 +17,20 @@ import { DoubleArray } from '../../types/array/double-array.js';
 
 export type AnyJ2OCLArray = CharArray | UCharArray | ShortArray | UShortArray | IntArray | UIntArray | LongArray | ULongArray | FloatArray | DoubleArray;
 
-export function elementCTypeOf(array: AnyJ2OCLArray): string
-{
-    if (array instanceof CharArray) return 'char';
-    if (array instanceof UCharArray) return 'uchar';
-    if (array instanceof ShortArray) return 'short';
-    if (array instanceof UShortArray) return 'ushort';
-    if (array instanceof IntArray) return 'int';
-    if (array instanceof UIntArray) return 'uint';
-    if (array instanceof LongArray) return 'long';
-    if (array instanceof ULongArray) return 'ulong';
-    if (array instanceof FloatArray) return 'float';
-    if (array instanceof DoubleArray) return 'double';
-    throw new Error('elementCTypeOf: not a J2OCL array instance');
+export function elementCTypeOf(array: AnyJ2OCLArray): string {
+  if (array instanceof CharArray) return 'char';
+  if (array instanceof UCharArray) return 'uchar';
+  if (array instanceof ShortArray) return 'short';
+  if (array instanceof UShortArray) return 'ushort';
+  if (array instanceof IntArray) return 'int';
+  if (array instanceof UIntArray) return 'uint';
+  if (array instanceof LongArray) return 'long';
+  if (array instanceof ULongArray) return 'ulong';
+  if (array instanceof FloatArray) return 'float';
+  if (array instanceof DoubleArray) return 'double';
+  throw new Error('elementCTypeOf: not a J2OCL array instance');
 }
 
-export function isAnyJ2OCLArray(value: unknown): value is AnyJ2OCLArray
-{
-    return value instanceof CharArray || value instanceof UCharArray || value instanceof ShortArray || value instanceof UShortArray || value instanceof IntArray || value instanceof UIntArray || value instanceof LongArray || value instanceof ULongArray || value instanceof FloatArray || value instanceof DoubleArray;
+export function isAnyJ2OCLArray(value: unknown): value is AnyJ2OCLArray {
+  return value instanceof CharArray || value instanceof UCharArray || value instanceof ShortArray || value instanceof UShortArray || value instanceof IntArray || value instanceof UIntArray || value instanceof LongArray || value instanceof ULongArray || value instanceof FloatArray || value instanceof DoubleArray;
 }
