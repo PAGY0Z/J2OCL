@@ -4,7 +4,7 @@
  * of this file, via any medium, is strictly prohibited.
  */
 
-export * from '../../src/compiler/index.js';
+export * from './compiler/index.js';
 export * from './types/index.js';
 export * from './decorators/index.js';
 export * from './intrinsics/index.js';
