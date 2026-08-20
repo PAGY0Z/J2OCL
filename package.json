@@ -1,6 +1,6 @@
 {
   "name": "@pagy0z/j2ocl",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": false,
   "description": "Write and run real OpenCL GPU kernels in TypeScript, compiled ahead-of-time to native OpenCL C.",
   "license": "UNLICENSED",
