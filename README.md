@@ -147,6 +147,12 @@ All importable from `@pagy0z/j2ocl`:
 | ------------- | ------------------------------ | -------------------- |
 | `getGlobalId` | `(dimension: 0 \| 1 \| 2) => UInt32` | `get_global_id` |
 
+## Acknowledgments
+
+Real GPU/CPU kernel execution (`runKernel`, `@pagy0z/j2ocl/execute`) is powered by
+[`@node-3d/opencl`](https://github.com/node-3d/opencl), the native OpenCL binding for
+Node.js written by [Luis Blanco](https://github.com/raub).
+
 ## Development
 
 ```bash
