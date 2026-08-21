@@ -12,11 +12,20 @@ device.
 
 ## Installation
 
+Requirement: **Node.js 24.13.0** (or any compatible `>=24.13.0` version).
+
 ```bash
-npm install @pagy0z/j2ocl
+node -v
 ```
 
-Requires Node.js >= 24.13.0.
+You should get `v24.13.0` (or any `v24.13.x`). If not, switch to Node 24.13 (e.g. via `nvm use`/`fnm use`, or install it) before continuing.
+
+```bash
+npm install @pagy0z/j2ocl
+npm install @node-3d/opencl
+```
+
+@node-3d/opencl is a native Node.js binding to OpenCL, which J2OCL uses to execute the compiled kernels on your GPU or CPU device. It requires an OpenCL driver installed on your machine. Acknowledgments to [Luis Blanco](https://github.com/LuisBlanco) at the [bottom of this README](#acknowledgments) for writing and maintaining @node-3d/opencl.
 
 ## Quick Start
 
@@ -122,6 +131,13 @@ node dist/main.js
 
 Running a kernel requires an OpenCL compatible device (GPU or CPU) with its driver
 installed on the machine.
+
+## Demo
+
+Working, runnable examples of the Quick Start above:
+
+- [`demo/demo-node-vanilla`](demo/demo-node-vanilla) — plain Node.js setup, with a step-by-step setup log of every command run to get from an empty folder to a working kernel.
+- [`demo/demo-nest-vanilla`](demo/demo-nest-vanilla) — NestJS integration.
 
 ## Supported Types
 
