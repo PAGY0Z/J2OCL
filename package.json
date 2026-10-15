@@ -47,7 +47,7 @@
     "j2ocl": "./dist/cli/bin.js"
   },
   "dependencies": {
-    "typescript": "^6.0.3"
+    "typescript": "^7.0.2"
   },
   "optionalDependencies": {
     "@node-3d/opencl": "^3.0.0"
